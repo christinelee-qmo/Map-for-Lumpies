@@ -1,0 +1,30 @@
+import requests
+from selenium import webdriver
+from bs4 import BeautifulSoup
+
+driver = webdriver.Chrome(executable_path="/Users/chocolee/git/Map-for-Lumpies.git/crawlers/chromedriver")
+
+#load page with input modal
+driver.get("https://www.ubereats.com/jp/feed?mod=locationManager&modctx=feed&next=%2Fjp%2Ffeed%3Fpl%3DJTdCJTIyYWRkcmVzcyUyMiUzQSUyMiVFMyU4MCU5MiUyMiUyQyUyMnJlZmVyZW5jZSUyMiUzQSUyMkNoSUpRWDctU3BCdTVUUVIzb25uMGIyS21ZVSUyMiUyQyUyMnJlZmVyZW5jZVR5cGUlMjIlM0ElMjJnb29nbGVfcGxhY2VzJTIyJTJDJTIybGF0aXR1ZGUlMjIlM0EyNi4xOTQzNzQlMkMlMjJsb25naXR1ZGUlMjIlM0ExMjcuNzUxNjcwNCU3RA%253D%253D%26ps%3D1&pl=JTdCJTIyYWRkcmVzcyUyMiUzQSUyMiVFMyU4MCU5MiUyMiUyQyUyMnJlZmVyZW5jZSUyMiUzQSUyMkNoSUpRWDctU3BCdTVUUVIzb25uMGIyS21ZVSUyMiUyQyUyMnJlZmVyZW5jZVR5cGUlMjIlM0ElMjJnb29nbGVfcGxhY2VzJTIyJTJDJTIybGF0aXR1ZGUlMjIlM0EyNi4xOTQzNzQlMkMlMjJsb25naXR1ZGUlMjIlM0ExMjcuNzUxNjcwNCU3RA%3D%3D&ps=1")
+#click "edit"
+postcode = driver.find_element_by_id("location-typeahead-location-manager-input")
+
+#type postcode
+postcode.send_keys("1680065")
+postcode.submit
+
+
+source = driver.page_source
+soup = BeautifulSoup(source, 'html.parser')
+#soup = BeautifulSoup(response.text, "html.parser")
+result = soup.find_all(string="入力された住所は配達エリア外です")
+print(result)
+
+
+#入力された住所は配達エリア外です
+
+#Tokyo 1680065
+#https://www.ubereats.com/jp/feed?ps=1&pl=JTdCJTIyYWRkcmVzcyUyMiUzQSUyMiVFMyU4MCU5MiUyMiUyQyUyMnJlZmVyZW5jZSUyMiUzQSUyMkNoSUp5eVRYRXBmdEdHQVJKcnNxSUxQVElKVSUyMiUyQyUyMnJlZmVyZW5jZVR5cGUlMjIlM0ElMjJnb29nbGVfcGxhY2VzJTIyJTJDJTIybGF0aXR1ZGUlMjIlM0EzNS43MjQ0MTgyJTJDJTIybG9uZ2l0dWRlJTIyJTNBMTM5LjYzNjI4MjklN0Q%3D
+
+#Okinawa 9011201
+#https://www.ubereats.com/jp/feed?ps=1&pl=JTdCJTIyYWRkcmVzcyUyMiUzQSUyMiVFMyU4MCU5MiUyMiUyQyUyMnJlZmVyZW5jZSUyMiUzQSUyMkNoSUpSMU1JWUZadjVUUVIzc1RDaHQtU0ZXOCUyMiUyQyUyMnJlZmVyZW5jZVR5cGUlMjIlM0ElMjJnb29nbGVfcGxhY2VzJTIyJTJDJTIybGF0aXR1ZGUlMjIlM0EyNi4xMzU1MDM3JTJDJTIybG9uZ2l0dWRlJTIyJTNBMTI3LjcyNjQyNTclN0Q%3D
