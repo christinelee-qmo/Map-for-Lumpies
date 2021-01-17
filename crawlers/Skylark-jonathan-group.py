@@ -1,1 +1,0 @@
-#https://delivery.skylark.co.jp/top
