@@ -2,18 +2,34 @@
   "name": "map-for-lumpies.git",
   "version": "1.0.0",
   "description": "map for lumpy people who want to live in a contry where you have food deliery choice",
-  "main": "index.js",
+  "main": "main.js",
   "dependencies": {
-    "ol": "^6.5.0",
-    "parcel-bundler": "^1.12.4"
+    "colormap": "2.3.1",
+    "ol": "6.5.0",
+    "ol-hashed": "^2.0.0",
+    "ol-mapbox-style": "4.3.1"
   },
   "devDependencies": {
-    "parcel": "^2.0.0-beta.1"
+    "copy-webpack-plugin": "5.0.2",
+    "css-loader": "2.1.1",
+    "eslint": "5.16.0",
+    "eslint-config-openlayers": "11.0.0",
+    "extract-text-webpack-plugin": "3.0.2",
+    "html-webpack-plugin": "3.2.0",
+    "kompas": "0.0.1",
+    "style-loader": "0.23.1",
+    "webpack": "4.29.6",
+    "webpack-cli": "^3.3.0",
+    "webpack-dev-server": "3.2.1"
+  },
+  "eslintConfig": {
+    "extends": "openlayers"
   },
   "scripts": {
-    "test": "\"echo \\\"Error: no test specified\\\" && exit 1\"",
-    "start": "parcel index.html",
-    "build": "parcel build --public-url . index.html"
+    "lint": "eslint .",
+    "test": "npm run lint",
+    "start": "webpack-dev-server --mode=development",
+    "build": "webpack --mode=production"
   },
   "repository": {
     "type": "git",

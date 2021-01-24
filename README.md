@@ -22,7 +22,7 @@ https://openlayers.org/en/latest/examples/cartodb.html
 #i18l?
 
 
-# Python 3.2
+# Python 3.9
 ## Librarues
 1. Beautiful Soup 4
 2. Selenium
