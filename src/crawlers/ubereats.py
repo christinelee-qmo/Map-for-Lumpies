@@ -6,10 +6,9 @@ from bs4 import BeautifulSoup
 
 from sys import argv
 
-#ppcodes = ['9011201','1680065','9011414']
-ppcodes = [argv[1],argv[2],argv[3]]
+ppcodes = ['9011201','1680065','9011414']
 
-driver = webdriver.Chrome(executable_path="./chromedriver")
+driver = webdriver.Chrome(executable_path="/Users/chocolee/git/Map-for-Lumpies.git/src/crawlers/chromedriver")
 
 for ppcode in ppcodes:
     #load page with input model
@@ -32,9 +31,9 @@ for ppcode in ppcodes:
     notime = soup.find_all(string="時間をおいて再度お試しください")
     
     if print(noservice) == '入力された住所は配達エリア外です':
-        print(noservice)
+        print("true")
     else:
-        print(notime)
+        print("false")
 
 
 
