@@ -4,7 +4,7 @@ const HtmlPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: './main.js',
-  output: {
+  outFt: {
     path: path.resolve(__dirname, 'build'),
     filename: 'main.js'
   },
@@ -29,3 +29,4 @@ module.exports = {
     })
   ]
 };
+
