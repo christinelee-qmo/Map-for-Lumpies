@@ -4,8 +4,9 @@ const HtmlPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: './main.js',
-  outFt: {
+  output: {
     path: path.resolve(__dirname, 'build'),
+    publicPath: "/Map-for-Lumpies/",
     filename: 'main.js'
   },
   devtool: 'source-map',
