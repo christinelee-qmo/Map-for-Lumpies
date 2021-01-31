@@ -8,7 +8,7 @@ from sys import argv
 
 ppcodes = ['9011201','1680065','9011414']
 
-driver = webdriver.Chrome(executable_path="/Users/chocolee/git/Map-for-Lumpies.git/src/crawlers/chromedriver")
+driver = webdriver.Chrome(executable_path="/Users/chocolee/git/Map-for-Lumpie/src/crawlers/chromedriver")
 
 for ppcode in ppcodes:
     #load page with input model
