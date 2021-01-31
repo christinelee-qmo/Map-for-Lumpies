@@ -1,9 +1,8 @@
 /**
  * @module ol/format/xsd
  */
-import {getAllTextContent, DOCUMENT} from '../xml.js';
+import {getAllTextContent, getDocument} from '../xml.js';
 import {padNumber} from '../string.js';
-
 
 /**
  * @param {Node} node Node.
@@ -13,7 +12,6 @@ export function readBoolean(node) {
   const s = getAllTextContent(node, false);
   return readBooleanString(s);
 }
-
 
 /**
  * @param {string} string String.
@@ -28,7 +26,6 @@ export function readBooleanString(string) {
   }
 }
 
-
 /**
  * @param {Node} node Node.
  * @return {number|undefined} DateTime in seconds.
@@ -39,7 +36,6 @@ export function readDateTime(node) {
   return isNaN(dateTime) ? undefined : dateTime / 1000;
 }
 
-
 /**
  * @param {Node} node Node.
  * @return {number|undefined} Decimal.
@@ -48,7 +44,6 @@ export function readDecimal(node) {
   const s = getAllTextContent(node, false);
   return readDecimalString(s);
 }
-
 
 /**
  * @param {string} string String.
@@ -64,7 +59,6 @@ export function readDecimalString(string) {
   }
 }
 
-
 /**
  * @param {Node} node Node.
  * @return {number|undefined} Non negative integer.
@@ -73,7 +67,6 @@ export function readNonNegativeInteger(node) {
   const s = getAllTextContent(node, false);
   return readNonNegativeIntegerString(s);
 }
-
 
 /**
  * @param {string} string String.
@@ -88,7 +81,6 @@ export function readNonNegativeIntegerString(string) {
   }
 }
 
-
 /**
  * @param {Node} node Node.
  * @return {string|undefined} String.
@@ -97,24 +89,21 @@ export function readString(node) {
   return getAllTextContent(node, false).trim();
 }
 
-
 /**
  * @param {Node} node Node to append a TextNode with the boolean to.
  * @param {boolean} bool Boolean.
  */
 export function writeBooleanTextNode(node, bool) {
-  writeStringTextNode(node, (bool) ? '1' : '0');
+  writeStringTextNode(node, bool ? '1' : '0');
 }
-
 
 /**
  * @param {Node} node Node to append a CDATA Section with the string to.
  * @param {string} string String.
  */
 export function writeCDATASection(node, string) {
-  node.appendChild(DOCUMENT.createCDATASection(string));
+  node.appendChild(getDocument().createCDATASection(string));
 }
-
 
 /**
  * @param {Node} node Node to append a TextNode with the dateTime to.
@@ -122,15 +111,21 @@ export function writeCDATASection(node, string) {
  */
 export function writeDateTimeTextNode(node, dateTime) {
   const date = new Date(dateTime * 1000);
-  const string = date.getUTCFullYear() + '-' +
-      padNumber(date.getUTCMonth() + 1, 2) + '-' +
-      padNumber(date.getUTCDate(), 2) + 'T' +
-      padNumber(date.getUTCHours(), 2) + ':' +
-      padNumber(date.getUTCMinutes(), 2) + ':' +
-      padNumber(date.getUTCSeconds(), 2) + 'Z';
-  node.appendChild(DOCUMENT.createTextNode(string));
+  const string =
+    date.getUTCFullYear() +
+    '-' +
+    padNumber(date.getUTCMonth() + 1, 2) +
+    '-' +
+    padNumber(date.getUTCDate(), 2) +
+    'T' +
+    padNumber(date.getUTCHours(), 2) +
+    ':' +
+    padNumber(date.getUTCMinutes(), 2) +
+    ':' +
+    padNumber(date.getUTCSeconds(), 2) +
+    'Z';
+  node.appendChild(getDocument().createTextNode(string));
 }
-
 
 /**
  * @param {Node} node Node to append a TextNode with the decimal to.
@@ -138,9 +133,8 @@ export function writeDateTimeTextNode(node, dateTime) {
  */
 export function writeDecimalTextNode(node, decimal) {
   const string = decimal.toPrecision();
-  node.appendChild(DOCUMENT.createTextNode(string));
+  node.appendChild(getDocument().createTextNode(string));
 }
-
 
 /**
  * @param {Node} node Node to append a TextNode with the decimal to.
@@ -148,14 +142,13 @@ export function writeDecimalTextNode(node, decimal) {
  */
 export function writeNonNegativeIntegerTextNode(node, nonNegativeInteger) {
   const string = nonNegativeInteger.toString();
-  node.appendChild(DOCUMENT.createTextNode(string));
+  node.appendChild(getDocument().createTextNode(string));
 }
-
 
 /**
  * @param {Node} node Node to append a TextNode with the string to.
  * @param {string} string String.
  */
 export function writeStringTextNode(node, string) {
-  node.appendChild(DOCUMENT.createTextNode(string));
+  node.appendChild(getDocument().createTextNode(string));
 }

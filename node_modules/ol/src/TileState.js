@@ -15,5 +15,4 @@ export default {
    */
   ERROR: 3,
   EMPTY: 4,
-  ABORT: 5
 };

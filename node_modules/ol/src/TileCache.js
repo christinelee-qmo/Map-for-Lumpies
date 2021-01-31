@@ -5,18 +5,8 @@ import LRUCache from './structs/LRUCache.js';
 import {fromKey, getKey} from './tilecoord.js';
 
 class TileCache extends LRUCache {
-
   /**
-   * @param {number=} opt_highWaterMark High water mark.
-   */
-  constructor(opt_highWaterMark) {
-
-    super(opt_highWaterMark);
-
-  }
-
-  /**
-   * @param {!Object<string, import("./TileRange.js").default>} usedTiles Used tiles.
+   * @param {!Object<string, boolean>} usedTiles Used tiles.
    */
   expireCache(usedTiles) {
     while (this.canExpireCache()) {
@@ -24,7 +14,7 @@ class TileCache extends LRUCache {
       if (tile.getKey() in usedTiles) {
         break;
       } else {
-        this.pop().dispose();
+        this.pop().release();
       }
     }
   }
@@ -39,14 +29,15 @@ class TileCache extends LRUCache {
     const key = this.peekFirstKey();
     const tileCoord = fromKey(key);
     const z = tileCoord[0];
-    this.forEach(function(tile) {
-      if (tile.tileCoord[0] !== z) {
-        this.remove(getKey(tile.tileCoord));
-        tile.dispose();
-      }
-    }.bind(this));
+    this.forEach(
+      function (tile) {
+        if (tile.tileCoord[0] !== z) {
+          this.remove(getKey(tile.tileCoord));
+          tile.release();
+        }
+      }.bind(this)
+    );
   }
 }
-
 
 export default TileCache;
