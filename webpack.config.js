@@ -6,8 +6,8 @@ module.exports = {
   entry: './main.js',
   output: {
     path: path.resolve(__dirname, 'build'),
-    publicPath: "/Map-for-Lumpies/",
-    filename: 'main.js'
+    // publicPath: "/Map-for-Lumpies/",
+    filename: 'index.js'
   },
   devtool: 'source-map',
   devServer: {
